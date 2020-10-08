@@ -1,0 +1,32 @@
+@model List<User>
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+        <a class="navbar-brand" href="/dashboard">
+            <h2>@ViewBag.ViewWed.WedderOne and @ViewBag.ViewWed.WedderTwo's Wedding</h2>
+        </a>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+            <ul class="navbar-nav align-items-center">
+                    <a class="text-dark" href="/dashboard"> <h5> Dashboard</h5></a>
+                    <a class="nav-link btn btn-outline-dark logoutbtn" asp-area="" asp-controller="Home" asp-action="Logout">Log Out</a>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<h4 class="text1">Date: @ViewBag.ViewWed.Date.ToString("d")</h4>
+
+<p><b>Wedding Planner: </b> @ViewBag.ViewWed.Creator</p>
+
+
+
+<h5 class="text2">Guests:</h5>
+
+@foreach(var u in Model)
+{
+    if(u.JoinedWedding.Any(u => u.UsersWeddings.WeddingId == ViewBag.ViewWed.WeddingId)) {
+        <p>@u.FirstName @u.LastName</p>
+    }
+            
+    
+}
+

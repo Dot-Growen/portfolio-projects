@@ -1,0 +1,59 @@
+@model User
+
+    @* <div class="header1 w-75 mx-auto">
+
+        <h2 class="head1">Welcome @Model.FirstName!</h2>
+        <h6 class="head3">$@Model.Balance</h6>
+        <h5 class="head2">Current balance:</h5>
+    </div> *@
+
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-0">
+        <div class="container">
+            <a class="navbar-brand" href="/dashboard">
+                <h2>Welcome @Model.FirstName!</h2>
+            </a>
+
+            
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="headNew navbar-nav align-items-center">
+                    <li class="nav-item ">
+            <span class="head2"> Current balance: <span class="text-primary">$@Model.Balance</span>  </span>
+                    </li>
+                    <li class="nav-item">
+                        <a class=" btn btn-outline-dark logoutbtn " href="/Logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<div class="table1">
+    <div class="w-75 mx-auto">
+        <form class=" d-flex row " action="/transaction" method="post">
+            <h5 class="align-self-center title1 col">Deposit/Withdraw:</h5>
+            <input class="align-self-center input1 col-2 form-control" name="Amount" type="number">
+            <input type="hidden" name="UserId" value="@Model.UserId">
+            <button class="align-self-center col-2 btn1 btn btn-outline-dark" type="sumbit">Sumbit</button>
+        </form>
+    </div>
+    <div class="card w-75 mx-auto">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Transaction Id</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var i in ViewBag.UT){
+                <tr>
+                    <td>@i.TransactionId</td>
+                    <td>@i.Amount</td>
+                    <td>@i.CreatedAt</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

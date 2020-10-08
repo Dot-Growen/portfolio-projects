@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+    <script src="{% static 'js/script.js' %}"></script> <!-- CHANGE JS FILE LOCATION -->
+
+    <title> Document </title>
+</head>
+
+<body class="wall_body">
+
+    <!-- HEADER SECTION -->
+
+    <div class="header_sec">
+        <h1 class="block1">The Great Wall of Gossip</h1>
+        <p class="block2"> Welcome {{user.first_name}}</p>
+        <a class="block3 btn btn-outline-light" href="/logout">Log Out</a>
+    </div>
+
+    <hr class="header_line">
+    <!-- POST MESSAGE SECTION -->
+    <div class="wall_page">
+        <div class="post_sec">
+
+            <h4>Post a message</h4>
+            <form action="/message" method="POST">
+                {% csrf_token %}
+                <textarea rows="4" name="message_form" class="post_area form-control"></textarea>
+                <button type="submit" class="post_btn btn btn-outline-primary" name="which_form" value={{user.id}}>Post
+                    a message</button>
+            </form>
+        </div>
+
+        <!-- MESSAGE SECTION -->
+
+        <div class="message_sec">
+            <!-- FOR LOOP1 -->
+            <div>
+                {%for msg in msg%}
+                <div class="feed_group">
+                    <h6>{{msg.user.first_name}} {{msg.user.last_name}} {{msg.created_at}}<a
+                            href="/delete/{{msg.id}}/{{msg.user.id}}/msg" class="delete btn-light">Delete
+                            message</a>
+                    </h6>
+                    {{msg.message}}
+                    <div class="comment_sec">
+                        {%for cmt in cmt%}
+                        {% if cmt.message.id == msg.id%}
+                        <h6>{{cmt.user.first_name}} {{cmt.user.last_name}} {{cmt.created_at}}<a
+                                href="/delete/{{cmt.id}}/{{cmt.user.id}}/cmt" class="delete  btn-light">Delete
+                                comment</a></h6>
+                        <p class="cmt">{{cmt.comment}}</p>
+                        {%endif%}
+                        {%endfor%}
+                    </div>
+                    <div class="post_comment_sec">
+                        <h4>Post a comment</h4>
+
+                        <form action="/comment" method="POST">
+                            {% csrf_token %}
+                            <textarea name="comment_form" class="post_area form-control"></textarea>
+                            <button type="submit" class=" post_btn btn btn-outline-success" name="which_form"
+                                value={{msg.id}}>Post a comment</button>
+                        </form>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

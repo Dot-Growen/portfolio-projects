@@ -58,7 +58,8 @@ input, textarea {
     border-radius: .3em;
     padding: .5em;
     margin-bottom: 3em;
-    max-width: 35%;
+    min-width: 15em;
+    max-width: 30em;
 }
 
 

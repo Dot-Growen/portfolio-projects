@@ -8,10 +8,8 @@ import 'antd/dist/antd.css';
 
 function App() {
 
-  // const query = "chicago";
   const apiKey = "bb6c7f28a851255adc62d57a7753f64e";
   const unit = "imperial";
-  // const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + apiKey + "&units=" + unit;
   const [temp, setTemp] = useState("");
   const [weatherDesc, setWeatherDesc] = useState("");
   const [icon, setIcon] = useState("");
@@ -42,7 +40,6 @@ function App() {
           {icon ? <img src={imageURL} /> : null}
           <h1 className="text-white">{temp}</h1>
           <h2 className="text-white">{weatherDesc}</h2>
-          <p>{}</p>
         </div>
       )}
     </div>

@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 const CityForm = ({cityName}) => {
     const [city, setCity] = useState("");
 
-
     const handleSumbit = (e) => {
         e.preventDefault()
         cityName(city)
